@@ -1,0 +1,28 @@
+service: hello-world
+provider:
+  name: aws
+  runtime: nodejs8.10
+  memorySize: 128
+functions:
+  hello:
+    handler: handler.hello
+    description: hello from http
+    events:
+      - http:
+          path: hello
+          method: get
+resources:
+  Resources:
+    requestsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: requests
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

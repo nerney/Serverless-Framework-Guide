@@ -251,7 +251,45 @@ Everything we have done up to this point can be extended into much larger, more 
 
 ### The `resources` block
 
-Working with resources and sharing them between Serverless services is where things can get tricky, and there are a couple of easy mistakes to make while you build your application.
+Working with resources and sharing them between Serverless services is where things can get tricky, and there are a couple of easy mistakes to make while you build your application. In the `resources` block, you will use raw CloudFormation to describe the resources to be used in your functions and services. A good example is a DynamoDB table. Let's look at how we would declare that:
+
+```yaml
+service: hello-world
+provider:
+  name: aws
+  runtime: nodejs8.10
+  memorySize: 128
+functions:
+  hello:
+    handler: handler.hello
+    description: log requests from http
+    events:
+      - http:
+          path: hello
+          method: get
+resources:
+  Resources:
+    requestsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: requests
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+```
+
+Now, we are going to need to be able to interact with Dynamo in our lambda function. So, let's give this a `package.json` to handle our dependency management and install the `aws-sdk`:
+
+```bash
+npm init -y
+npm install --save aws-sdk
+```
 
 ## _TODO_
 
