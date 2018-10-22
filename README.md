@@ -223,18 +223,24 @@ stack: hello-world-dev
 api keys:
   None
 endpoints:
-  GET - https://pio14bs95l.execute-api.us-east-1.amazonaws.com/dev/hello
+  GET - https://XXXXXXXXXX.execute-api.us-east-1.amazonaws.com/dev/hello
 functions:
   hello: hello-world-dev-hello
-
-Stack Outputs:
-HelloLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:XXXXXXXX:function:hello-world-dev-hello:2
-ServiceEndpoint: https://XXXXXXXX.execute-api.us-east-1.amazonaws.com/dev
-ServerlessDeploymentBucketName: hello-world-dev-serverlessdeploymentbucket-XXXXXXXX
 ```
 
-In `Stack Outputs`, the `Service Endpoint:` is our API Gateway endpoint. Since we configured our function to respond to get requests to `/hello`, we can do a curl and see if it's working properly, and sure enough, running `curl https://XXXXXXXX.execute-api.us-east-1.amazonaws.com/dev/hello` responds with exactly what we expect:
+In `endpoints`, the `GET -` is endpoint for our function. And. sure enough, running `curl -i https://XXXXXXXXXX.execute-api.us-east-1.amazonaws.com/dev/hello` responds with exactly what we want:
 
 ```bash
+HTTP/2 200
+content-type: application/json
+content-length: 5
+date: Mon, 22 Oct 2018 15:53:54 GMT
+x-amzn-requestid: ad05e454-d612-11e8-85b1-6154ab631db5
+x-amz-apigw-id: PLLWvEvyoAMFuLA=
+x-amzn-trace-id: Root=1-5bcdf291-8df7ac1935b50947b8fa5f02;Sampled=0
+x-cache: Miss from cloudfront
+via: 1.1 e2bc21de81a2b5a06f939e3377436b82.cloudfront.net (CloudFront)
+x-amz-cf-id: TpubiMfFF2hfAQ6QGlsAbJ_-hKU8zSQrldZFF-HQ3P0nSsLwXTWyww==
+
 HELLO
 ```
