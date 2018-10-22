@@ -263,3 +263,4 @@ Working with resources and sharing them between Serverless services is where thi
   - use Serverless for everything that you are managing with serverless, you can break your stack easily if you eff around in the console.
   - separate your resources from your logic, why have a service/function deploy do anything with your resources and vice-versa; manage your resources in their own deploys, apart from the functions and services that use them.
 - what not to Serverless? Things like VPCs, Security Groups, or other stuff that you might want to provide to your devs for use in their services rather than configuring themselves. Raw CloudFormation as little as possible, ie only the things that aren't cumbersome to include in your `serverless.yml`
+- stages, testing, and gotchas with creds
