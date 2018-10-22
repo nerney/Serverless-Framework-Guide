@@ -251,4 +251,15 @@ Everything we have done up to this point can be extended into much larger, more 
 
 ### The `resources` block
 
-Working with resources and sharing them between Serverless services is where things can get tricky, and there are a couple of easy mistakes to make while you build your application. 
+Working with resources and sharing them between Serverless services is where things can get tricky, and there are a couple of easy mistakes to make while you build your application.
+
+## _TODO_
+
+- describing resources
+- capturing outputs, linking services
+- resource services(?)
+- service all the things, keep things small for atomic deploys
+- Serverless all the things
+  - use Serverless for everything that you are managing with serverless, you can break your stack easily if you eff around in the console.
+  - separate your resources from your logic, why have a service/function deploy do anything with your resources and vice-versa; manage your resources in their own deploys, apart from the functions and services that use them.
+- what not to Serverless? Things like VPCs, Security Groups, or other stuff that you might want to provide to your devs for use in their services rather than configuring themselves. Raw CloudFormation as little as possible, ie only the things that aren't cumbersome to include in your `serverless.yml`
