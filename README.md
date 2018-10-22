@@ -60,7 +60,7 @@ functions:
 
 With this, we can simply run:
 
-```toml
+```sh
 sls deploy -v
 
 # Serverless goes off and does its thing, and we see the results:
@@ -212,7 +212,7 @@ functions:
 
 Let's run `sls deploy` and see what we get back!
 
-```toml
+```sh
 sls deploy
 
 # aaandddd, the final results!:
