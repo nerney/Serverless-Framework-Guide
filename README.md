@@ -30,7 +30,7 @@ serverless.yml
 
 The `.gitignore` just has package directories and the .serverless directory, and the hello-world lambda function that is provided by the template is very straightforward (comment removed for brevity):
 
-```bash
+```javascript
 'use strict';
 
 module.exports.hello = async (event, context) => {
@@ -38,15 +38,15 @@ module.exports.hello = async (event, context) => {
     statusCode: 200,
     body: JSON.stringify({
       message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    }),
+      input: event
+    })
   };
 };
 ```
 
 The real magic is in the `serverless.yml` file. It includes comments providing boilerplate for a lot of different configuration options, but for hello-world, we only need the 7 uncommented lines:
 
-```bash
+```r
 service: hello-world
 
 provider:
@@ -60,7 +60,7 @@ functions:
 
 With this, we can simply run:
 
-```bash
+```r
 sls deploy -v
 
 # Serverless goes off and does its thing, and we see the results:
@@ -78,7 +78,7 @@ functions:
 
 Using the CLI we can invoke this function and return the logs produced by the invocation.
 
-```bash
+```json
 sls invoke -f hello -l
 
 # we get back:
@@ -91,3 +91,36 @@ sls invoke -f hello -l
 Using the CLI, you can redeploy functions individually, view logs for functions, and when you want to teardown a service completely, just run `sls remove`
 
 ## Exploring `serverless.yml`
+
+Going through the `serverless.yml` generated with `sls create` gives you an idea of the amount of configuration you can provide.
+
+### Declare your service
+
+```yaml
+service: hello-world
+
+# you may also fix the service to a specific version of Serverless
+# frameworkVersion: "=X.X.X"
+```
+
+### The `provider` block
+
+This is where you will provide configuration for the cloud provider you are using, as well as any global configuration for the lambda functions that are a part of your service. There is a lot here. And, you may not need to make use of many of these options, so we won't try to address them all here. The check out the full reference docs go here: [Serverless.yml Reference](https://serverless.com/framework/docs/providers/aws/guide/serverless.yml)
+
+To start, declare your cloud provider and the runtime for your functions.
+
+```yaml
+provider:
+  name: aws
+  runtime: nodejs8.10
+```
+
+Among the configuration options available here, you can provide a default memory size for your lambda functions (if the default GB is a bit more than you need). And, you can set any service-wide environment variables.
+
+```yaml
+memorySize: 256
+environment:
+  websiteURL: serverless.com
+  defaultUsername: bobby
+  defaultPass: B0$$H0$$
+```
