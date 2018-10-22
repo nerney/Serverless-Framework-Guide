@@ -244,3 +244,11 @@ x-amz-cf-id: TpubiMfFF2hfAQ6QGlsAbJ_-hKU8zSQrldZFF-HQ3P0nSsLwXTWyww==
 
 HELLO
 ```
+
+So, this is just one type of trigger. You can specify a wide array of triggers for your functions; like, whenever an object is created in an S3 bucket, simply scheduling the events, whenever a message is published to an SNS topic, Kinesis stream events, IOT, and CloudWatch events generally. This makes configuring the event-driven aspect of your service really convenient.
+
+Everything we have done up to this point can be extended into much larger, more complicated services. You might have a service with different runtimes for different functions. You might have 1 SNS topic trigger multiple functions. Or, maybe you want 1 function to be triggered by 5 different events. It is up to you. But, complexity of individual services does start to become a question. At what point do you break things apart into separate services? And, once you do that, you have to start thinking about how do I link my services together? There are also questions concerning CI/CD workflow that arise as well. We will try to address some of these as we continue, but we need one more big piece before we can do that...
+
+### The `resources` block
+
+Working with resources and sharing them between Serverless services is where things can get tricky, and there are a couple of easy mistakes to make while you build your application. 
