@@ -158,7 +158,7 @@ functions:
     runtime: nodejs6.10
 ```
 
-The `hello` function will use the global config for `memorySize` and `runtime` we used in the `provider` block. But, `world` has its own `memorySize` and `runtime` declared, so it will use those without effecting the configuration of any of our other functions.
+The `hello` function will use the global config for `memorySize` and `runtime` we used in the `provider` block. But, `world` has its own `memorySize` and `runtime` declared, so it will use those without affecting the configuration of any of our other functions.
 
 This is cool, but it gets really cool when we get into events. Here, you are able to declare any of the events you want to have trigger your lambda functions. Serverless takes care of all the plumbing and you can just concentrate on writing the business logic.
 
